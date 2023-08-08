@@ -20,7 +20,7 @@ pipeline {
                     docker.withRegistry('https://index.docker.io/v1/', 'docker-hub') {
                         // Dockerfile 로 이미지 생성 
                         // docker.build("태그명", "Dockerfile 경로") docker pipeline 설치 후 사용 가능
-                        docker.build('ehszl409/jenkins-test-httpd', './$PROJECT_NAME/ubuntu_apache2/')    
+                        docker.build('ehszl409/jenkins-test-httpd', './ubuntu_apache2/', '--no-cache')    
                     }
                 }
             }
@@ -32,7 +32,7 @@ pipeline {
                     docker.withRegistry('https://index.docker.io/v1/', 'docker-hub') {
                         // Dockerfile 로 이미지 생성 
                         // docker.build("태그명", "Dockerfile 경로") docker pipeline 설치 후 사용 가능
-                        docker.build('ehszl409/jenkins-test-nginx', './$PROJECT_NAME/ubuntu_nginx/')    
+                        docker.build('ehszl409/jenkins-test-nginx', './ubuntu_nginx/', '--no-cache')    
                     }
                 }
             }
@@ -44,12 +44,12 @@ pipeline {
                     docker.withRegistry('https://index.docker.io/v1/', 'docker-hub') {
                         // Dockerfile 로 이미지 생성 
                         // docker.build("태그명", "Dockerfile 경로") docker pipeline 설치 후 사용 가능
-                        docker.build('ehszl409/jenkins-test-nginxlb', './$PROJECT_NAME/ubuntu_nginx_loadbalancer/')    
+                        docker.build('ehszl409/jenkins-test-nginxlb', './ubuntu_nginx_loadbalancer/', '--no-cache')    
                     }
                 }
             }
         }
-        stage('Docker Image Push'){
+        stage('Docker Images Push'){
             steps{
                 script{
                     docker.withRegistry('https://index.docker.io/v1/', 'docker-hub'){
@@ -57,9 +57,9 @@ pipeline {
                         def img-nginx = docker.image('ehszl409/jenkins-test-nginx')
                         def img-nginxlb = docker.image('ehszl409/jenkins-test-nginxlb')
       
-                        img-httpd.push('0.2')
-                        img-nginx.push('0.2')
-                        img-nginxlb.push('0.2')
+                        img-httpd.push('0.3')
+                        img-nginx.push('0.3')
+                        img-nginxlb.push('0.3')
                         img-httpd.push('latest')
                         img-nginx.push('latest')
                         img-nginxlb.push('latest')

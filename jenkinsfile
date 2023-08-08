@@ -53,16 +53,16 @@ pipeline {
             steps{
                 script{
                     docker.withRegistry('https://index.docker.io/v1/', 'docker-hub'){
-                        def img-httpd = docker.image('ehszl409/jenkins-test-httpd')
-                        def img-nginx = docker.image('ehszl409/jenkins-test-nginx')
-                        def img-nginxlb = docker.image('ehszl409/jenkins-test-nginxlb')
+                        def imghttpd = docker.image('ehszl409/jenkins-test-httpd')
+                        def imgnginx = docker.image('ehszl409/jenkins-test-nginx')
+                        def imgnginxlb = docker.image('ehszl409/jenkins-test-nginxlb')
       
-                        img-httpd.push('0.3')
-                        img-nginx.push('0.3')
-                        img-nginxlb.push('0.3')
-                        img-httpd.push('latest')
-                        img-nginx.push('latest')
-                        img-nginxlb.push('latest')
+                        imghttpd.push('0.3')
+                        imgnginx.push('0.3')
+                        imgnginxlb.push('0.3')
+                        imghttpd.push('latest')
+                        imgnginx.push('latest')
+                        imgnginxlb.push('latest')
                     }
                 }
             }
